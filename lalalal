@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For Arman 💖</title>
+    <style>
+        body {
+            background-color: #ffe4e1; /* soft pink */
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        /* I styled this box to hold everything */
+        #container {
+            background: white;
+            width: 320px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px grey;
+        }
+
+        h1 {
+            color: #ff527b;
+            font-size: 2.5rem;
+        }
+
+        button {
+            background: #ff6384;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* floating hearts stuff - got the animation idea online */
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { bottom: -50px; opacity: 1; }
+            100% { bottom: 100vh; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating hearts manually put in so they drift around -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">💕</div>
+    <div class="heart" style="left: 55%; animation-delay: 1s;">💖</div>
+    <div class="heart" style="left: 80%; animation-delay: 3s;">🌸</div>
+    <div class="heart" style="left: 90%; animation-delay: 0.5s;">💖</div>
+
+    <!-- Screen 1 -->
+    <div id="card1" class="box">
+        <div id="container">
+            <h1>For Arman 💖</h1>
+            <button onclick="openPage()">Open</button>
+        </div>
+    </div>
+
+    <!-- Screen 2 -->
+    <div id="card2" style="display: none;">
+        <div id="container">
+            <h2 id="randomReason" style="color: #4a4a4a;">...</h2>
+            
+            <p>We've been together for <span id="daysCounter" style="font-weight: bold; color: #ff527b;">0</span> days!</p>
+
+            <div id="lockArea">
+                <p>Unlock my letter:</p>
+                <input id="passInput" type="text" placeholder="our phrase...">
+                <br><br>
+                <button onclick="checkPassword()">Unlock</button>
+            </div>
+
+            <!-- The letter is hidden until correct password -->
+            <div id="secretLetter" style="display: none; text-align: left; font-size: 14px; line-height: 1.6; margin-top: 15px;">
+                <p>Hey baby,</p>
+                <p>I wanted to make something special for you, just to remind you of how much you mean to me. Sometimes it’s hard to put into words exactly how I feel, but I wanted you to have this so you can look back at it whenever you need a reminder.</p>
+                <p>I hope you know how deeply and incredibly much I love you. You are my favorite part of every single day, and being with you is a gift I never take for granted.</p>
+                <p>I also just really want to say how immensely proud I am of you. I see how hard you work, how much you care, and the way you handle everything life throws at you. You have such a good heart, Arman. I know without a single doubt that you are going to do amazing things. Your future is so incredibly bright, and I am so lucky that I get to stand by your side.</p>
+                <p>Thank you for just being you, and for loving me the way you do. No matter where life takes us, it’s always you and me.</p>
+                <p>I love you more than words can say.</p>
+                <p><strong>Always and forever,<br>Lana 💖</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // list of reasons
+        var reasons = [
+            "Because your smile fixes everything.",
+            "Because you feel like home.",
+            "Because you are my safe place.",
+            "Because you make every day special."
+        ];
+
+        function openPage() {
+            document.getElementById("card1").style.display = "none";
+            document.getElementById("card2").style.display = "block";
+
+            // choose a random reason
+            var num = Math.floor(Math.random() * reasons.length);
+            document.getElementById("randomReason").innerText = reasons[num];
+
+            // date calculation (found this math on Google)
+            var start = new Date("2025-06-01");
+            var today = new Date();
+            var difference = today.getTime() - start.getTime();
+            var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            
+            document.getElementById("daysCounter").innerText = days;
+        }
+
+        function checkPassword() {
+            var userInput = document.getElementById("passInput").value;
+            var cleanInput = userInput.toLowerCase().trim();
+
+            if (cleanInput == "always and forever") {
+                document.getElementById("lockArea").style.display = "none";
+                document.getElementById("secretLetter").style.display = "block";
+            } else {
+                alert("Wrong password!");
+            }
+        }
+    </script>
+</body>
+</html>
